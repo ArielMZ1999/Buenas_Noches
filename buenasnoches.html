@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buenas Noches</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #001f3f;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #001f3f, #000);
+        }
+        .message {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        .moon {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            width: 150px;
+            height: 150px;
+            background-color: #f1c40f;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #f1c40f;
+            transform: translateX(-50%);
+        }
+        .star-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .star-container div {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkling 2s infinite alternate;
+        }
+        @keyframes twinkling {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        .shooting-star {
+            position: absolute;
+            width: 3px;
+            height: 100px;
+            background: linear-gradient(white, rgba(255, 255, 255, 0));
+            border-radius: 50%;
+            transform: rotate(45deg);
+            animation: shooting-star 3s infinite;
+        }
+        @keyframes shooting-star {
+            0% { transform: translateY(100vh) translateX(-200vh) rotate(72deg); opacity: 1; }
+            100% { transform: translateY(0) translateX(100vh) rotate(72deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="moon"></div>
+    <div class="message">
+        <h1>Buenas Noches</h1>
+        <p>Si ves una estrella fugaz, pide un deseo. 🌠 <br>
+            Yo solamente soñaré contigo 🙈❤️ <br>
+        </p>
+    </div>
+    <div class="star-container" id="stars"></div>
+    <div id="shooting-stars"></div>
+    <audio autoplay loop>
+        <source src="audio.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio.
+    </audio>
+    <script>
+        const starContainer = document.getElementById('stars');
+        const shootingStarContainer = document.getElementById('shooting-stars');
+        const numStars = 150;
+        const numShootingStars =25;
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.animationDuration = `${1 + Math.random() * 2}s`; 
+            star.style.animationDelay = `${Math.random()}s`; 
+            starContainer.appendChild(star);
+        }
+        for (let i = 0; i < numShootingStars; i++) {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            shootingStar.style.top = `${Math.random() * 100}vh`;
+            shootingStar.style.left = `${Math.random() * 100}vw`;
+            shootingStar.style.animationDelay = `${Math.random() * 5}s`;
+            shootingStar.style.animationDuration = `${2 + Math.random() * 3}s`; 
+            shootingStarContainer.appendChild(shootingStar);
+        }
+    </script>
+</body>
+</html>
